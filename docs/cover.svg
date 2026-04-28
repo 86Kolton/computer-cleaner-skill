@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
   <title id="title">电脑清理 Computer Cleaner Skill</title>
-  <desc id="desc">A calm technical banner showing safe local disk scanning and confirmed cleanup workflow.</desc>
+  <desc id="desc">A calm technical banner showing safe local disk scanning and a tool-agnostic confirmed cleanup workflow.</desc>
   <rect width="1200" height="360" fill="#f6f8fb"/>
   <rect x="0" y="0" width="1200" height="360" fill="#eef4f8"/>
   <path d="M0 276h1200v84H0z" fill="#dbe7ee"/>

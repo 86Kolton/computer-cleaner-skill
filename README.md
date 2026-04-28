@@ -4,7 +4,7 @@
 
 ![电脑清理封面](docs/cover.svg)
 
-一个面向 Codex 的安全电脑清理 skill。它默认只做本地只读扫描，生成分级清理、迁移和复扫方案；任何删除、移动、改配置动作都必须逐项确认，并优先保留回滚路径。
+一个面向 AI 编程助手、本地自动化 agent 和支持技能/提示词工作流的开发工具的安全电脑清理 skill。核心扫描器不依赖 Codex 私有能力，任何能读取说明并执行本地 Python/PowerShell 的工具都可以接入；它默认只做本地只读扫描，生成分级清理、迁移和复扫方案，任何删除、移动、改配置动作都必须逐项确认，并优先保留回滚路径。
 
 ## 适用场景
 
@@ -22,9 +22,32 @@
 - 高风险目录默认只列存在状态；需要测量时必须显式加 `--measure-high-risk-known`。
 - 删除类动作优先使用回收站或非 C 盘隔离区，并写 manifest/undo 信息。
 
-## 安装
+## 适用对象
 
-使用 Codex 的 skill installer 从 GitHub 安装：
+- Codex、Claude Code、Cursor、Cherry Studio、自定义 agent、终端工作流，以及其他支持本地命令执行的开发工具。
+- 支持 skill、prompt、slash command、workflow template 等不同形态接入。
+- 核心扫描器是标准库 Python 脚本，不依赖第三方包，也不要求特定 IDE 或特定模型。
+
+## 安装与接入
+
+### 通用接入
+
+把 `skills/qing-li-dian-nao/SKILL.md` 作为你所用工具的技能说明、系统提示、命令模板或工作流提示词导入，再把 `skills/qing-li-dian-nao/scripts/cleanup_scan.py` 暴露给本地命令执行层即可。
+
+如果你的工具不支持原生 skill 安装，也可以直接复用仓库里的脚本和说明：
+
+```powershell
+$env:PYTHONUTF8 = "1"
+python ".\skills\qing-li-dian-nao\scripts\cleanup_scan.py" `
+  --root "D:\Downloads" `
+  --output "D:\cleanup-reports"
+```
+
+常见触发表达可以映射成按钮、命令或快捷短语，例如：`/清理电脑`、`清理电脑`、`C盘爆了`、`找重复文件`。
+
+### Codex 安装示例
+
+如果你正在使用 Codex，也可以直接用它的 skill installer 从 GitHub 安装：
 
 ```powershell
 python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-skill-from-github.py" `
@@ -32,11 +55,11 @@ python "$env:USERPROFILE\.codex\skills\.system\skill-installer\scripts\install-s
   --path skills/qing-li-dian-nao
 ```
 
-安装后重启 Codex，让新 skill 生效。之后可以用 `/清理电脑`、`清理电脑`、`C盘爆了`、`找重复文件` 等表达触发。
+安装后重启 Codex，让新 skill 生效。
 
 ## 直接运行扫描器
 
-扫描器是标准库 Python 脚本，不依赖第三方包：
+扫描器是标准库 Python 脚本，不依赖第三方包，也是最通用的使用方式：
 
 ```powershell
 $env:PYTHONUTF8 = "1"
