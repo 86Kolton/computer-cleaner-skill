@@ -17,6 +17,7 @@ SKILL_DIR = REPO / "skills" / "qing-li-dian-nao"
 SCRIPT = SKILL_DIR / "scripts" / "cleanup_scan.py"
 TEST_ROOT = REPO / "qldn-test-root"
 REPORT_ROOT = REPO / "qldn-test-reports"
+README = REPO / "README.md"
 
 
 def reset_dir(path: Path) -> None:
@@ -93,6 +94,7 @@ def test_skill_files() -> None:
         SKILL_DIR / "agents" / "openai.yaml",
         SKILL_DIR / "references" / "research-synthesis.md",
         SCRIPT,
+        REPO / "docs" / "integration.md",
     ]
     for path in required:
         assert path.exists(), f"missing required file: {path}"
@@ -104,10 +106,16 @@ def test_skill_files() -> None:
     assert "--include-dev-heavy" in skill
     assert "--measure-high-risk-known" in skill
     assert "<skill-dir>" in skill
+    assert "其他 AI 编程工具" in skill
 
     openai_yaml = (SKILL_DIR / "agents" / "openai.yaml").read_text(encoding="utf-8")
     assert "display_name: \"清理电脑\"" in openai_yaml
     assert "allow_implicit_invocation: true" in openai_yaml
+
+    readme = README.read_text(encoding="utf-8")
+    assert "AI 编程助手" in readme
+    assert "docs/integration.md" in readme
+    assert "面向 Codex 的安全电脑清理 skill" not in readme
 
 
 def test_no_local_machine_paths() -> None:
@@ -223,6 +231,28 @@ def test_limit_missing_root_and_known_location_switch() -> None:
     assert high_measured.size and high_measured.measured
 
 
+def test_default_output_dir_prefers_generic_non_c_env() -> None:
+    module = load_module()
+    original_env = os.environ.copy()
+    original_cwd = Path.cwd()
+    non_c_tmp = REPORT_ROOT / "non-c-temp"
+    non_c_tmp.mkdir(parents=True, exist_ok=True)
+    c_drive_cwd = Path.home()
+    if not str(c_drive_cwd).lower().startswith("c:"):
+        c_drive_cwd = Path("C:/")
+    try:
+        os.environ["CLEANUP_REPORT_DIR"] = str(non_c_tmp)
+        os.environ.pop("CODEX_HOME", None)
+        os.chdir(c_drive_cwd)
+        output_dir = module.default_output_dir()
+        assert str(output_dir).endswith("cleanup-reports")
+        assert str(non_c_tmp / "cleanup-reports") == str(output_dir)
+    finally:
+        os.chdir(original_cwd)
+        os.environ.clear()
+        os.environ.update(original_env)
+
+
 def main() -> int:
     cleanup()
     make_fixture()
@@ -234,6 +264,7 @@ def main() -> int:
         test_scan_default_and_hash,
         test_scan_include_dev_heavy,
         test_limit_missing_root_and_known_location_switch,
+        test_default_output_dir_prefers_generic_non_c_env,
     ]
     try:
         for test in tests:

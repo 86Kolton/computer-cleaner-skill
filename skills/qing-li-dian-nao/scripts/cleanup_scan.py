@@ -610,15 +610,33 @@ def default_output_dir() -> Path:
     if not str(path_anchor(cwd_output)).lower().startswith("c:"):
         return cwd_output
 
-    codex_home = os.environ.get("CODEX_HOME")
     candidates: list[Path] = []
+    for env_name in (
+        "CLEANUP_REPORT_DIR",
+        "SKILL_TMP_DIR",
+        "WORKSPACE_TEMP",
+        "PROJECT_TEMP",
+        "TMPDIR",
+        "TEMP",
+        "TMP",
+    ):
+        raw = os.environ.get(env_name)
+        if raw:
+            candidates.append(Path(raw) / "cleanup-reports")
+    codex_home = os.environ.get("CODEX_HOME")
     if codex_home:
         candidates.append(Path(codex_home) / ".tmp" / "cleanup-reports")
     for letter in "DEFGHIJKLMNOPQRSTUVWXYZ":
         drive = Path(f"{letter}:/")
         if drive.exists():
             candidates.append(drive / "cleanup-reports")
+
+    seen: set[str] = set()
     for candidate in candidates:
+        key = str(candidate)
+        if key in seen:
+            continue
+        seen.add(key)
         if not str(path_anchor(candidate)).lower().startswith("c:"):
             return candidate
     return cwd_output

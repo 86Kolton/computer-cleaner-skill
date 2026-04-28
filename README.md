@@ -33,6 +33,7 @@
 ### 通用接入
 
 把 `skills/qing-li-dian-nao/SKILL.md` 作为你所用工具的技能说明、系统提示、命令模板或工作流提示词导入，再把 `skills/qing-li-dian-nao/scripts/cleanup_scan.py` 暴露给本地命令执行层即可。
+需要的只是三类基础能力：本地 Python/PowerShell 执行、本地文件系统读取、以及在执行删除/移动前向用户确认。
 
 如果你的工具不支持原生 skill 安装，也可以直接复用仓库里的脚本和说明：
 
@@ -44,6 +45,7 @@ python ".\skills\qing-li-dian-nao\scripts\cleanup_scan.py" `
 ```
 
 常见触发表达可以映射成按钮、命令或快捷短语，例如：`/清理电脑`、`清理电脑`、`C盘爆了`、`找重复文件`。
+更细的接入建议见 [docs/integration.md](docs/integration.md)。
 
 ### Codex 安装示例
 
@@ -80,6 +82,9 @@ python ".\skills\qing-li-dian-nao\scripts\cleanup_scan.py" `
 ## 仓库结构
 
 ```text
+docs/
+  cover.svg
+  integration.md
 skills/qing-li-dian-nao/
   SKILL.md
   agents/openai.yaml

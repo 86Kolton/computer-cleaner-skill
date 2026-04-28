@@ -1,7 +1,7 @@
 interface:
   display_name: "清理电脑"
-  short_description: "安全扫描磁盘占用，生成可确认、可回滚的清理与迁移方案"
-  default_prompt: "Use $qing-li-dian-nao to safely scan my computer, produce a cleanup plan, and ask before changing anything."
+  short_description: "本地只读扫描磁盘占用，生成可确认、可回滚的清理与迁移方案"
+  default_prompt: "Use $qing-li-dian-nao to locally scan computer storage, produce a reversible cleanup plan, and always confirm before changing files, folders, or settings."
 
 policy:
   allow_implicit_invocation: true
