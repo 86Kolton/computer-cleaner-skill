@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">电脑清理 Computer Cleaner Skill</title>
+  <desc id="desc">A calm technical banner showing safe local disk scanning and confirmed cleanup workflow.</desc>
+  <rect width="1200" height="360" fill="#f6f8fb"/>
+  <rect x="0" y="0" width="1200" height="360" fill="#eef4f8"/>
+  <path d="M0 276h1200v84H0z" fill="#dbe7ee"/>
+  <g transform="translate(82 64)">
+    <rect x="0" y="0" width="278" height="184" rx="18" fill="#143642"/>
+    <rect x="18" y="18" width="242" height="132" rx="10" fill="#f9fbfc"/>
+    <rect x="56" y="168" width="166" height="16" rx="8" fill="#6c8a93"/>
+    <rect x="104" y="184" width="70" height="36" rx="8" fill="#8fb3bd"/>
+    <rect x="46" y="48" width="156" height="10" rx="5" fill="#2f6f73"/>
+    <rect x="46" y="74" width="196" height="10" rx="5" fill="#9bbfc7"/>
+    <rect x="46" y="100" width="124" height="10" rx="5" fill="#d09154"/>
+    <circle cx="218" cy="52" r="18" fill="#2f6f73"/>
+    <path d="M209 52l6 6 13-15" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(430 77)">
+    <text x="0" y="0" fill="#143642" font-family="Segoe UI, Arial, sans-serif" font-size="60" font-weight="700">电脑清理</text>
+    <text x="0" y="56" fill="#385760" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="600">Computer Cleaner Skill</text>
+    <text x="0" y="110" fill="#4f6870" font-family="Segoe UI, Arial, sans-serif" font-size="24">只读扫描 · 分级方案 · 逐项确认 · 可回滚</text>
+    <g transform="translate(0 146)">
+      <rect x="0" y="0" width="146" height="42" rx="21" fill="#2f6f73"/>
+      <text x="28" y="28" fill="#fff" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="600">Read-only</text>
+      <rect x="164" y="0" width="150" height="42" rx="21" fill="#d09154"/>
+      <text x="190" y="28" fill="#fff" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="600">Confirm first</text>
+      <rect x="332" y="0" width="132" height="42" rx="21" fill="#143642"/>
+      <text x="362" y="28" fill="#fff" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="600">Rollback</text>
+    </g>
+  </g>
+  <g transform="translate(965 80)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="0" y="0" width="118" height="160" rx="22" fill="#ffffff" stroke="#8fb3bd" stroke-width="5"/>
+    <path d="M30 44h58M30 78h58M30 112h36" stroke="#6c8a93" stroke-width="8"/>
+    <circle cx="88" cy="112" r="19" fill="#2f6f73" stroke="none"/>
+    <path d="M80 112l6 6 14-18" stroke="#fff" stroke-width="5"/>
+  </g>
+</svg>
